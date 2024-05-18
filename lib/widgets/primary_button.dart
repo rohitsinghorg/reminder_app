@@ -5,12 +5,18 @@ class PrimaryButton extends StatelessWidget {
   final String title;
   final void Function() onTap;
   final String? iconPath;
+  final double? horizontalPadding;
+  final double? verticalPadding;
+  final double? borderRadius;
 
   const PrimaryButton({
     super.key,
     required this.title,
     required this.onTap,
     this.iconPath,
+    this.horizontalPadding,
+    this.verticalPadding,
+    this.borderRadius,
   });
 
   @override
@@ -21,10 +27,10 @@ class PrimaryButton extends StatelessWidget {
           backgroundColor: Theme.of(context).primaryColor,
           foregroundColor: Theme.of(context).shadowColor,
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(2.5.w)),
+              borderRadius: BorderRadius.circular(borderRadius ?? 2.5.w)),
           padding: EdgeInsets.symmetric(
-            horizontal: 7.5.w,
-            vertical: 1.5.h,
+            horizontal: horizontalPadding ?? 7.5.w,
+            vertical: verticalPadding ?? 1.5.h,
           )),
       child: Row(
         mainAxisSize: MainAxisSize.min,

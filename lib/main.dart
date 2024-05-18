@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         ),
         // theme: //lightTheme,
         // darkTheme: darkTheme,
-        home: Home2Screen(),
+        home: LoginScreen(),
       );
     });
   }

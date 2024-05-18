@@ -14,113 +14,52 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.primary,
-      body: SizedBox(
-        height: 75.sh,
-        child: Stack(
-          children: [
-            Image.asset(
-              "assets/images/note-1.jpg",
-              fit: BoxFit.fitHeight,
-              alignment: Alignment.centerRight,
-              height: 75.sh,
-              color: Theme.of(context).colorScheme.primary,
-              colorBlendMode: BlendMode.multiply,
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 7.5.w),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Ring Bell",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      fontSize: 24.sp,
-                    ),
-                  ),
-                  Text(
-                    "Let us keep you progressive, punctuate & profound",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      color: Colors.white,
-                      fontSize: 15.sp,
-                    ),
-                  ),
-                ],
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 5.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 15.h,
               ),
-            ),
-          ],
-        ),
-      ),
-      bottomSheet: Container(
-        width: 100.sh,
-        height: 35.sh,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(4.5.w),
+              Image.asset("assets/images/team.png"),
+              SizedBox(
+                height: 1.5.h,
+              ),
+              Text(
+                "Planner, Reminder, Calendar",
+                style: TextStyle(
+                  fontSize: 21.sp,
+                  fontWeight: FontWeight.w700,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+              SizedBox(
+                height: 1.h,
+              ),
+              Text(
+                "You can check and handle your projects schedules in a more convenient way",
+                style: TextStyle(
+                  fontSize: 15.sp,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              SizedBox(
+                height: 5.h,
+              ),
+              PrimaryButton(
+                title: "Let's Go",
+                onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => const Home2Screen())),
+                horizontalPadding: 9.5.w,
+                verticalPadding: 2.25.h,
+                borderRadius: 3.5.w,
+              ),
+            ],
           ),
-        ),
-        padding: EdgeInsets.only(top: 2.5.h, left: 5.5.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Sign in by using",
-              style: TextStyle(
-                fontWeight: FontWeight.w400,
-                color: Colors.black,
-                fontSize: 15.sp,
-              ),
-            ),
-            SizedBox(
-              height: 2.5.h,
-            ),
-            Center(
-              child: PrimaryButton(
-                title: "Login with Google",
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const Home2Screen(),
-                  ),
-                ),
-                iconPath: "assets/images/google-icon.png",
-              ),
-            ),
-            SizedBox(
-              height: 1.5.h,
-            ),
-            Center(
-              child: PrimaryButton(
-                title: "Login with Facebook",
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const Home2Screen(),
-                  ),
-                ),
-                iconPath: "assets/images/facebook-icon.png",
-              ),
-            ),
-            SizedBox(
-              height: 1.5.h,
-            ),
-            Center(
-              child: PrimaryButton(
-                  title: "Login with LinkedIn",
-                  onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const Home2Screen(),
-                        ),
-                      ),
-                  iconPath: "assets/images/linked-in-icon.png"),
-            ),
-          ],
         ),
       ),
     );

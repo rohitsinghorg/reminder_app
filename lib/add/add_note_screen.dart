@@ -21,6 +21,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
       _currentFormat = 0;
   int selectedIndex = 0;
   bool showWeeklyCalendar = true;
+  late String _repeatInfo = "Your event will occur only once";
   TimeOfDay selectedTime = TimeOfDay.now();
   late Map<DateTime, List<String>> _selectedEvents = Map();
 
@@ -75,16 +76,6 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                 ),
               ],
             ),
-            /*Container(
-              width: 15.w,
-              height: 15.w,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(999),
-                child: Image.network(
-                    "https://t4.ftcdn.net/jpg/03/26/98/51/360_F_326985142_1aaKcEjMQW6ULp6oI9MYuv8lN9f8sFmj.jpg",
-                    fit: BoxFit.cover),
-              ),
-            ),*/
           ],
         ),
         automaticallyImplyLeading: true,
@@ -128,108 +119,6 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                   SizedBox(
                     height: 1.5.h,
                   ),
-                  /*Container(
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primary,
-                borderRadius: BorderRadius.circular(4.5.w),
-              ),
-              padding: EdgeInsets.symmetric(
-                horizontal: 2.5.w,
-              ),
-              child: TableCalendar(
-                firstDay: DateTime.utc(2010, 10, 16),
-                lastDay: DateTime.utc(2030, 3, 14),
-                focusedDay: DateTime.now(),
-                calendarFormat: showWeeklyCalendar
-                    ? CalendarFormat.week
-                    : CalendarFormat.month,
-                startingDayOfWeek: StartingDayOfWeek.monday,
-                selectedDayPredicate: (dateTime) {
-                },
-                headerStyle: const HeaderStyle(
-                  titleTextStyle: TextStyle(color: Colors.white),
-                  titleCentered: true,
-                  formatButtonVisible: false,
-                  leftChevronIcon: Icon(
-                    Icons.chevron_left_sharp,
-                    color: Colors.white,
-                  ),
-                  rightChevronIcon: Icon(
-                    Icons.chevron_right_sharp,
-                    color: Colors.white,
-                  ),
-                ),
-                calendarStyle: CalendarStyle(
-                  weekendTextStyle: const TextStyle(color: Colors.white70),
-                  defaultTextStyle: const TextStyle(color: Colors.white70),
-                  selectedTextStyle: const TextStyle(color: Colors.white70),
-                  todayTextStyle: TextStyle(
-                      color: Theme.of(context).colorScheme.primary,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16.sp),
-                  todayDecoration: const BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-                daysOfWeekStyle: const DaysOfWeekStyle(
-                  weekdayStyle: TextStyle(color: Colors.white),
-                  weekendStyle: TextStyle(color: Colors.white),
-                ),
-                calendarBuilders: CalendarBuilders(
-                    defaultBuilder: (context, day, selectedDay) {
-                  log("DefaultBuilder: ${_getEventsForDay(day)}");
-                  return Center(
-                    child: Container(
-                      width: 10.w,
-                      height: 10.w,
-                      decoration: BoxDecoration(
-                        color: _getEventsForDay(day).isEmpty
-                            ? null
-                            : Colors.white,
-                        shape: BoxShape.circle,
-                        border: _getEventsForDay(day).isEmpty
-                            ? null
-                            : Border.all(color: Colors.white),
-                      ),
-                      alignment: Alignment.center,
-                      child: Text(
-                        "${day.day}",
-                        style: TextStyle(
-                          color: _getEventsForDay(day).isEmpty
-                              ? Colors.white70
-                              : Theme.of(context).colorScheme.primary,
-                          fontSize:
-                              _getEventsForDay(day).isEmpty ? 16.sp : 16.5.sp,
-                          fontWeight: _getEventsForDay(day).isEmpty
-                              ? FontWeight.w400
-                              : FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  );
-                }, todayBuilder: (context, day, selectedDay) {
-                  return Center(
-                    child: Container(
-                      width: 10.w,
-                      height: 10.w,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(color: Colors.white),
-                      ),
-                      alignment: Alignment.center,
-                      child: Text(
-                        "${day.day}",
-                        style:
-                            TextStyle(color: Colors.white, fontSize: 16.sp),
-                      ),
-                    ),
-                  );
-                }, markerBuilder: (context, day, eventList) {
-                  return const SizedBox();
-                }),
-              ),
-            ),*/
                   Row(
                     children: [
                       Expanded(
@@ -342,6 +231,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                     height: 1.5.h,
                   ),
                   TextFormField(
+                    textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
                       border: const UnderlineInputBorder(
                         borderSide: BorderSide(
@@ -356,7 +246,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                       labelText: "Enter Title",
                       labelStyle: TextStyle(
                         fontSize: 16.sp,
-                        color: Colors.grey,
+                        color: Colors.black,
                       ),
                       isDense: true,
                       alignLabelWithHint: true,
@@ -380,7 +270,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                       labelText: "Enter Note",
                       labelStyle: TextStyle(
                         fontSize: 16.sp,
-                        color: Colors.grey,
+                        color: Colors.black,
                       ),
                       isDense: true,
                       alignLabelWithHint: true,
@@ -392,8 +282,8 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                   Text(
                     "Repeat",
                     style: TextStyle(
-                      fontSize: 15.sp,
-                      color: Colors.grey,
+                      fontSize: 16.sp,
+                      color: Colors.black,
                     ),
                   ),
                   Wrap(
@@ -467,6 +357,17 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                       ),
                     ],
                   ),
+                  SizedBox(
+                    height: 0.5.h,
+                  ),
+                  Text(
+                    _repeatInfo,
+                    style: TextStyle(
+                      fontSize: 15.sp,
+                      color: Colors.black54,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
                   /*SizedBox(
               height: 1.5.h,
             ),
@@ -535,6 +436,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
             ["Event 1"],
       });
       showWeeklyCalendar = true;
+      _repeatInfo = "Your event will occur only once";
     } else if (index == 1) {
       // Daily
       for (int i = 0; i < 1; i++) {
@@ -545,6 +447,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
       }
       _selectedEvents.addAll(map);
       showWeeklyCalendar = true;
+      _repeatInfo = "Your event will repeat daily";
     } else if (index == 2) {
       // Weekly
       for (int i = 0; i < 8; i++) {
@@ -553,6 +456,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
       }
       _selectedEvents.addAll(map);
       showWeeklyCalendar = false;
+      _repeatInfo = "Your event will occur on every Wednesday";
     } else if (index == 3) {
       // Monthly
       for (int i = 0; i < 31; i++) {
@@ -561,6 +465,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
       }
       _selectedEvents.addAll(map);
       showWeeklyCalendar = false;
+      _repeatInfo = "Your event will occur on every 5th of month";
     } else if (index == 4) {
       // Yearly
       for (int i = 0; i < 365; i++) {
@@ -569,6 +474,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
       }
       _selectedEvents.addAll(map);
       showWeeklyCalendar = false;
+      _repeatInfo = "Your event will occur on every 19th May";
     }
   }
 
