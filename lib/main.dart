@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:reminder_app/add/add_note_provider.dart';
 import 'package:reminder_app/helpers/themes.dart';
-import 'package:reminder_app/home/home_screen.dart';
+import 'package:reminder_app/home/home2_provider.dart';
 import 'package:reminder_app/login/login_screen.dart';
 import 'package:reminder_app/temp/temp_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -9,7 +11,12 @@ import 'add/add_note_screen.dart';
 import 'home/home2_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => Home2Provider()),
+        ChangeNotifierProvider(create: (context) => AddNoteProvider()),
+      ],
+      child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

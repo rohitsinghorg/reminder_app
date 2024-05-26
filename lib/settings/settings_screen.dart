@@ -2,13 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({super.key});
+  const SettingsScreen({Key? key}) : super(key: key);
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  bool vibration = false;
+  bool customTone = false;
+  bool snooze = true;
+  bool preAlert = false;
+  bool flashlight = true;
+  bool homeScreenWidget = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,18 +28,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              children: const [
                 Text(
                   "Customise your input",
                   style: TextStyle(
-                      fontSize: 15.sp,
+                      fontSize: 15,
                       fontWeight: FontWeight.w400,
                       color: Colors.white),
                 ),
                 Text(
                   "Settings",
                   style: TextStyle(
-                    fontSize: 21.sp,
+                    fontSize: 21,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
@@ -50,155 +57,139 @@ class _SettingsScreenState extends State<SettingsScreen> {
         color: Theme.of(context).colorScheme.primary,
       ),
       bottomSheet: DraggableScrollableSheet(
-          initialChildSize: 1.0,
-          maxChildSize: 1.0,
-          minChildSize: 1.0,
-          builder: (context, controller) {
-        return SingleChildScrollView(
-          controller: controller,
-          child: Container(
-            padding: EdgeInsets.only(
-              left: 4.5.w,
-              right: 4.5.w,
-              top: 2.5.h,
-            ),
-            decoration: BoxDecoration(
+        initialChildSize: 1.0,
+        maxChildSize: 1.0,
+        minChildSize: 1.0,
+        builder: (context, controller) {
+          return SingleChildScrollView(
+            controller: controller,
+            child: Container(
+              padding: EdgeInsets.only(
+                left: 4.5.w,
+                right: 4.5.w,
+                top: 2.5.h,
+              ),
+              decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.vertical(
                   top: Radius.circular(7.5.w),
-                )),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Choose a custom settings",
-                  style: TextStyle(
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w700,
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildCheckboxListTile(
+                    title: "Vibration",
+                    subtitle:
+                    "This selection requires the permission of your device.",
+                    value: vibration,
+                    onChanged: (value) {
+                      setState(() {
+                        vibration = value!;
+                      });
+                    },
                   ),
-                ),
-                SizedBox(
-                  height: 1.5.h,
-                ),
-                CheckboxListTile(
-                    title: Text(
-                      "Vibration",
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    subtitle: Text(
-                      "This selection requires the permission of your device.",
-                      style: TextStyle(fontSize: 13.sp),
-                    ),
-                    value: false,
-                    onChanged: (value) {}),
-                SizedBox(
-                  height: 1.5.h,
-                ),
-                CheckboxListTile(
-                    title: Text(
-                      "Custom Tone",
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    subtitle: Text(
-                      "This selection requires the permission of your device.",
-                      style: TextStyle(fontSize: 13.sp),
-                    ),
-                    value: false,
-                    onChanged: (value) {}),
-                SizedBox(
-                  height: 1.5.h,
-                ),
-                CheckboxListTile(
-                    title: Text(
-                      "Snooze",
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    subtitle: Text(
-                      "If you miss the notification, then after how many times we should remind you again.",
-                      style: TextStyle(fontSize: 13.sp),
-                    ),
-                    value: true,
-                    onChanged: (value) {}),
-                SizedBox(
-                  height: 1.5.h,
-                ),
-                CheckboxListTile(
-                    title: Text(
-                      "Pre-Alert",
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    subtitle: Text(
-                      "This is a pre-alert notification that you would like to see.",
-                      style: TextStyle(fontSize: 13.sp),
-                    ),
-                    value: false,
-                    onChanged: (value) {}),
-                SizedBox(
-                  height: 1.5.h,
-                ),
-                CheckboxListTile(
-                    title: Text(
-                      "Flashlight",
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    subtitle: Text(
-                      "This selection may requires the permission of your device.",
-                      style: TextStyle(fontSize: 13.sp),
-                    ),
-                    value: true,
-                    onChanged: (value) {}),
-                SizedBox(
-                  height: 1.5.h,
-                ),
-                CheckboxListTile(
-                    title: Text(
-                      "Home Screen Widget",
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    subtitle: Text(
-                      "This selection requires the permission of your device.",
-                      style: TextStyle(fontSize: 13.sp),
-                    ),
-                    value: false,
-                    onChanged: (value) {}),
-                SizedBox(
-                  height: 1.5.h,
-                ),
-                ListTile(
-                  title: Text(
-                    "Log Out",
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w600,
-                    ),
+                  _buildCheckboxListTile(
+                    title: "Custom Tone",
+                    subtitle:
+                    "This selection requires the permission of your device.",
+                    value: customTone,
+                    onChanged: (value) {
+                      setState(() {
+                        customTone = value!;
+                      });
+                    },
                   ),
-                  onTap: (){
+                  _buildCheckboxListTile(
+                    title: "Snooze",
+                    subtitle:
+                    "If you miss the notification, then after how many times we should remind you again.",
+                    value: snooze,
+                    onChanged: (value) {
+                      setState(() {
+                        snooze = value!;
+                      });
+                    },
+                  ),
+                  _buildCheckboxListTile(
+                    title: "Pre-Alert",
+                    subtitle:
+                    "This is a pre-alert notification that you would like to see.",
+                    value: preAlert,
+                    onChanged: (value) {
+                      setState(() {
+                        preAlert = value!;
+                      });
+                    },
+                  ),
+                  _buildCheckboxListTile(
+                    title: "Flashlight",
+                    subtitle:
+                    "This selection may requires the permission of your device.",
+                    value: flashlight,
+                    onChanged: (value) {
+                      setState(() {
+                        flashlight = value!;
+                      });
+                    },
+                  ),
+                  _buildCheckboxListTile(
+                    title: "Home Screen Widget",
+                    subtitle:
+                    "This selection requires the permission of your device.",
+                    value: homeScreenWidget,
+                    onChanged: (value) {
+                      setState(() {
+                        homeScreenWidget = value!;
+                      });
+                    },
+                  ),
+                  ListTile(
+                    title: const Text(
+                      "Log Out",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    onTap: () {},
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
 
-                  },
-                ),
-              ],
+  Widget _buildCheckboxListTile({
+    required String title,
+    required String subtitle,
+    required bool value,
+    required Function(bool?)? onChanged,
+  }) {
+    return Column(
+      children: [
+        CheckboxListTile(
+          title: Text(
+            title,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
             ),
           ),
-        );
-      }),
+          subtitle: Text(
+            subtitle,
+            style: TextStyle(fontSize: 13),
+          ),
+          value: value,
+          onChanged: onChanged,
+        ),
+        SizedBox(
+          height: 1.5.h,
+        ),
+      ],
     );
   }
 }

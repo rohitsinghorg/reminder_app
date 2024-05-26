@@ -1,14 +1,16 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class AddNoteProvider extends ChangeNotifier {
   int _currentDay = DateTime.now().day;
   int _currentMonth = DateTime.now().month;
-  int _currentHour = int.parse(DateFormat("h").format(DateTime.now()));
+  int _currentHour = int.parse(DateFormat('h').format(DateTime.now()));
   int _currentMinute = int.parse(DateFormat("mm").format(DateTime.now()));
   int _currentFormat = DateFormat("a").format(DateTime.now()) == "AM" ? 0 : 1;
   int _selectedIndex = 0;
-  String _repeatInfo = "Your event will occur only once";
+  String _repeatInfo = "One-time event: Useful for small tasks.";
   TimeOfDay _selectedTime = TimeOfDay.now();
 
   int get currentDay => _currentDay;
@@ -84,19 +86,19 @@ class AddNoteProvider extends ChangeNotifier {
 
       switch (_selectedIndex) {
         case 0:
-          _repeatInfo = "Your event will occur only once";
+          _repeatInfo = "One-time event: Useful for small tasks.";
           break;
         case 1:
-          _repeatInfo = "Your event will repeat daily at $_currentHour:$paddedMinute ${_currentFormat == 0 ? 'AM' : 'PM'}.";
+          _repeatInfo = "Daily at $_currentHour:$paddedMinute ${_currentFormat == 0 ? 'AM' : 'PM'}: Ideal for habits like drinking water, going to the gym, reading, etc.";
           break;
         case 2:
-          _repeatInfo = "Your event will occur on every $formattedDate";
+          _repeatInfo = "Every $formattedDate: Great for weekly meetings, cleaning, grocery shopping, etc.";
           break;
         case 3:
-          _repeatInfo = "Your event will occur on every $_currentDay${getDayOfMonthSuffix(_currentDay)} of the month";
+          _repeatInfo = "Monthly on the $_currentDay${getDayOfMonthSuffix(_currentDay)}: Perfect for bills, recharges, installment reminders, etc.";
           break;
         case 4:
-          _repeatInfo = "Your event will occur on every $_currentDay${getDayOfMonthSuffix(_currentDay)}, $monthName";
+          _repeatInfo = "Yearly on $monthName $_currentDay${getDayOfMonthSuffix(_currentDay)}: Use for birthdays, anniversaries, and annual reminders.";
           break;
       }
     } catch (e) {
