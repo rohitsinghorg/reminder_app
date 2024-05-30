@@ -20,7 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 5.w),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               SizedBox(
                 height: 15.h,
@@ -30,12 +30,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 1.5.h,
               ),
               Text(
-                "Planner, Reminder, Calendar",
+                "Planner, Reminder & Calendar",
                 style: TextStyle(
                   fontSize: 21.sp,
                   fontWeight: FontWeight.w700,
                   color: Theme.of(context).colorScheme.primary,
                 ),
+                // textAlign: TextAlign.end,
               ),
               SizedBox(
                 height: 1.h,
@@ -46,6 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   fontSize: 15.sp,
                   fontWeight: FontWeight.w500,
                 ),
+                // textAlign: TextAlign.end,
               ),
               SizedBox(
                 height: 5.h,
@@ -54,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 title: "Let's Go",
                 onTap: () => Navigator.push(context,
                     MaterialPageRoute(builder: (_) => const Home2Screen())),
-                horizontalPadding: 9.5.w,
+                // horizontalPadding: 50.5.w,
                 verticalPadding: 2.25.h,
                 borderRadius: 3.5.w,
               ),

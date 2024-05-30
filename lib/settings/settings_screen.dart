@@ -23,12 +23,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
         toolbarHeight: 10.h,
-        title: Row(
+        title: const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: [
                 Text(
                   "Customise your input",
                   style: TextStyle(
@@ -174,14 +174,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
         CheckboxListTile(
           title: Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
             ),
           ),
           subtitle: Text(
             subtitle,
-            style: TextStyle(fontSize: 13),
+            style: const TextStyle(fontSize: 13),
           ),
           value: value,
           onChanged: onChanged,

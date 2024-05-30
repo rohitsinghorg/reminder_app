@@ -43,6 +43,7 @@ dependencies:
   draggable_home: ^1.0.5
   intl: ^0.18.1
   provider: ^6.1.2
+  flutter_local_notifications: ^17.1.2
 
 dependency_overrides:
   syncfusion_flutter_datepicker: ^23.2.6

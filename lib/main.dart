@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 import 'package:reminder_app/add/add_note_provider.dart';
-import 'package:reminder_app/helpers/themes.dart';
 import 'package:reminder_app/home/home2_provider.dart';
 import 'package:reminder_app/login/login_screen.dart';
-import 'package:reminder_app/temp/temp_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import 'add/add_note_screen.dart';
-import 'home/home2_screen.dart';
-
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+  FlutterLocalNotificationsPlugin();
+  flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
+      AndroidFlutterLocalNotificationsPlugin>()?.requestNotificationsPermission();
+
   runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => Home2Provider()),
-        ChangeNotifierProvider(create: (context) => AddNoteProvider()),
       ],
       child: const MyApp()));
 }
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
         ),
         // theme: //lightTheme,
         // darkTheme: darkTheme,
-        home: LoginScreen(),
+        home: const LoginScreen(),
       );
     });
   }

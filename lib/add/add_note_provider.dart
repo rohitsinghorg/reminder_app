@@ -8,8 +8,7 @@ class AddNoteProvider extends ChangeNotifier {
   int _currentMonth = DateTime.now().month;
   int _currentHour = int.parse(DateFormat('h').format(DateTime.now()));
   int _currentMinute = int.parse(DateFormat("mm").format(DateTime.now()));
-  int _currentFormat = DateFormat("a").format(DateTime.now()) == "AM" ? 0 : 1;
-  int _selectedIndex = 0;
+  int _currentFormat = DateFormat("a").format(DateTime.now()) == "AM" ? 0 : 1;  int _selectedIndex = 0;
   String _repeatInfo = "One-time event: Useful for small tasks.";
   TimeOfDay _selectedTime = TimeOfDay.now();
 
